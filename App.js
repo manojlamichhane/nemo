@@ -12,27 +12,28 @@ import HomeScreen from './Screens/HomeScreen';
 import EducationHome from './Screens/EducationHome';
 import EducationDetail from './Screens/EducationDetail';
 import EducationStack from './navigation/EducationStack';
+
 const App = () => {
   return (
-    <EducationDetail />
+    // <EducationDetail />
     // <EducationHome />
-    // <AuthProvider>
-    //   <View style={styles.container}>
-    //     <NavigationContainer>
-    //       <AuthContext.Consumer>
-    //         {context => {
-    //           if (context.isAuthenticating) {
-    //             return <LoginSplash />;
-    //           }
-    //           if (context.education) {
-    //             return <EducationStack />;
-    //           }
-    //           return context.isSkip ? <DrawerNavigator /> : <AuthStack />;
-    //         }}
-    //       </AuthContext.Consumer>
-    //     </NavigationContainer>
-    //   </View>
-    // </AuthProvider>
+    <AuthProvider>
+      <View style={styles.container}>
+        <NavigationContainer>
+          <AuthContext.Consumer>
+            {context => {
+              if (context.isAuthenticating) {
+                return <LoginSplash />;
+              }
+              if (context.education) {
+                return <EducationStack />;
+              }
+              return context.isSkip ? <DrawerNavigator /> : <AuthStack />;
+            }}
+          </AuthContext.Consumer>
+        </NavigationContainer>
+      </View>
+    </AuthProvider>
   );
 };
 

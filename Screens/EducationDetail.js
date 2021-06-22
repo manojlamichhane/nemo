@@ -1,83 +1,34 @@
-import React, {useRef} from 'react';
-import {View} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {StyleSheet, Image, Text, View, Linking} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import Video from 'react-native-video';
-import MediaControls, {PLAYER_STATES} from 'react-native-media-controls';
+import Typo from '../constants/Typo';
+import {Button} from 'react-native-paper';
+import axios from 'axios';
 
 const EducationDetail = props => {
-  const videoPlayer = useRef(null);
-  const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [isFullScreen, setIsFullScreen] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
-  const [paused, setPaused] = useState(false);
-  const [playerState, setPlayerState] = useState(PLAYER_STATES.PLAYING);
-  const [screenType, setScreenType] = useState('content');
-
-  const onSeek = seek => {
-    //Handler for change in seekbar
-    videoPlayer.current.seek(seek);
-  };
-
-  const onPaused = playerState => {
-    //Handler for Video Pause
-    setPaused(!paused);
-    setPlayerState(playerState);
-  };
-
-  const onReplay = () => {
-    //Handler for Replay
-    setPlayerState(PLAYER_STATES.PLAYING);
-    videoPlayer.current.seek(0);
-  };
-
-  const onProgress = data => {
-    // Video Player will progress continue even if it ends
-    if (!isLoading && playerState !== PLAYER_STATES.ENDED) {
-      setCurrentTime(data.currentTime);
+  const [detail, setDetail] = useState({});
+  useEffect(async () => {
+    try {
+      const resp = await axios.get(
+        `https://api.docnemo.com:443/educational/${props.route.params.kind}/readAll`,
+      );
+      console.log(resp.data);
+      const resp2 = await resp.data.find(
+        item => item.id == props.route.params.id,
+      );
+      setDetail(resp2);
+      console.log(detail);
+    } catch (e) {
+      console.log(e);
     }
-  };
+  }, []);
 
-  const onLoad = data => {
-    setDuration(data.duration);
-    setIsLoading(false);
-  };
-
-  const onLoadStart = data => setIsLoading(true);
-
-  const onEnd = () => setPlayerState(PLAYER_STATES.ENDED);
-
-  const onError = () => alert('Oh! ', error);
-
-  const exitFullScreen = () => {
-    alert('Exit full screen');
-  };
-
-  const enterFullScreen = () => {};
-
-  const onFullScreen = () => {
-    setIsFullScreen(isFullScreen);
-    if (screenType == 'content') setScreenType('cover');
-    else setScreenType('content');
-  };
-
-  const renderToolbar = () => (
-    <View>
-      <Text
-        style={{
-          marginTop: 30,
-          backgroundColor: 'white',
-          padding: 10,
-          borderRadius: 5,
-        }}>
-        toolbar
-      </Text>
-    </View>
-  );
-
-  const onSeeking = currentTime => setCurrentTime(currentTime);
   return (
-    <View style={{marginTop: 42, paddingHorizontal: 20}}>
+    <View
+      style={{
+        marginTop: 42,
+        paddingHorizontal: 20,
+      }}>
       <Icon
         onPress={() => props.navigation.navigate('EducationHome')}
         style={{position: 'relative', left: 0}}
@@ -85,36 +36,63 @@ const EducationDetail = props => {
         size={40}
         color="black"
       />
-      <Video
-        onEnd={onEnd}
-        onLoad={onLoad}
-        onLoadStart={onLoadStart}
-        onProgress={onProgress}
-        paused={paused}
-        ref={videoPlayer}
-        resizeMode={screenType}
-        onFullScreen={isFullScreen}
-        source={{
-          uri: 'https://assets.mixkit.co/videos/download/mixkit-countryside-meadow-4075.mp4',
+      <View style={{marginVertical: 20}}>
+        <Typo weight="bold" size="30">
+          {detail && detail.title}
+        </Typo>
+      </View>
+      <Typo size="12">MARCH 26,2020 | DIABETES, HEALTH</Typo>
+      <View style={{marginVertical: 10}}>
+        <Typo size="14">
+          If left untreated, hypoglycemia can cause serious complications.
+        </Typo>
+      </View>
+      <View
+        style={{
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+          alignItems: 'center',
+        }}>
+        <View style={{flexDirection: 'row', alignItems: 'center'}}>
+          <Image
+            style={{width: 47, height: 47, marginRight: 10}}
+            source={require('../assets/images/image_59.png')}
+          />
+          <Typo size="12">Brittany Doohan</Typo>
+        </View>
+        <Typo size="12">{detail && detail.video_length_second} second</Typo>
+      </View>
+      <Image
+        style={{
+          marginTop: 15,
+          width: 336,
+          height: 154,
+          borderRadius: 20,
+          marginBottom: 30,
         }}
-        style={{width: 336, height: 154}}
-        volume={10}
+        source={{uri: detail && detail.thumbnail_link}}
       />
-      <MediaControls
-        duration={duration}
-        isLoading={isLoading}
-        mainColor="#333"
-        onFullScreen={onFullScreen}
-        onPaused={onPaused}
-        onReplay={onReplay}
-        onSeek={onSeek}
-        onSeeking={onSeeking}
-        playerState={playerState}
-        progress={currentTime}
-        toolbar={renderToolbar()}
-      />
+      <Typo size="14">{detail && detail.description}</Typo>
+      <Button
+        style={styles.button}
+        mode="contained"
+        onPress={() => {
+          Linking.openURL(detail && detail.article_link);
+        }}>
+        Read More
+      </Button>
     </View>
   );
 };
-
+const styles = StyleSheet.create({
+  button: {
+    marginTop: 75,
+    backgroundColor: '#42deb4',
+    width: '100%',
+    height: 50,
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+});
 export default EducationDetail;

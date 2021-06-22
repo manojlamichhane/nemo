@@ -5,8 +5,9 @@ import Typo from '../constants/Typo';
 import {windowWidth, windowHeight} from '../constants';
 import {TextInput, Button} from 'react-native-paper';
 import AuthContext from '../store/contexts/AuthContext';
+import Icon from 'react-native-vector-icons/Ionicons';
 
-const PatientLogin = () => {
+const PatientLogin = props => {
   const authcontext = useContext(AuthContext);
   return (
     <View style={{flex: 1, marginTop: 42, alignItems: 'center'}}>
@@ -16,6 +17,13 @@ const PatientLogin = () => {
           justifyContent: 'space-between',
           alignItems: 'center',
         }}>
+        {/* <Icon
+          onPress={() => console.log('pressed')}
+          // style={{position: 'absolute', right: 10}}
+          name="arrow-back"
+          size={40}
+          color="black"
+        /> */}
         <Image
           style={{width: 109, height: 20}}
           source={require('../assets/images/logo.png')}
@@ -77,6 +85,12 @@ const PatientLogin = () => {
           mode="contained"
           onPress={() => authcontext.changeStatus()}>
           Skip
+        </Button>
+        <Button
+          style={styles.button}
+          mode="contained"
+          onPress={() => props.navigation.navigate('Home')}>
+          Back
         </Button>
       </View>
     </View>
