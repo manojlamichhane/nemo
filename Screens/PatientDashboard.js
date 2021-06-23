@@ -1,12 +1,5 @@
 import React, {useContext} from 'react';
-import {
-  TouchableOpacity,
-  Pressable,
-  Image,
-  View,
-  StyleSheet,
-  ScrollView,
-} from 'react-native';
+import {TouchableOpacity, Image, View, StyleSheet} from 'react-native';
 import Separator from '../constants/Separator';
 import Typo from '../constants/Typo';
 import {windowWidth} from '../constants';
@@ -18,12 +11,12 @@ const PatientDashboard = props => {
   return (
     <View style={{paddingHorizontal: 17, paddingVertical: 24}}>
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
-        <Pressable onPress={() => props.navigation.openDrawer()}>
+        <TouchableOpacity onPress={() => props.navigation.openDrawer()}>
           <Image
             style={{width: 56, height: 56}}
             source={require('../assets/images/menu_icon.png')}
           />
-        </Pressable>
+        </TouchableOpacity>
         <Image
           style={{width: 140, height: 26, marginLeft: 15}}
           source={require('../assets/images/logo.png')}
@@ -60,54 +53,52 @@ const PatientDashboard = props => {
           </Typo>
         </View>
       </View>
-      <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={styles.adminCard}>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}>
-            <View>
-              <Image
-                style={{width: 22, height: 16}}
-                source={require('../assets/images/signals.png')}
-              />
-              <Typo weight="bold" size="22">
-                Symptom Check
-              </Typo>
-              <Typo weight="normal" size="14">
-                Refferals, wait times & NPS
-              </Typo>
-            </View>
-            <Icon name="navigate-next" size={40} color="#c9c9d4" />
-          </View>
-        </View>
 
-        <View style={styles.adminCard}>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}>
-            <TouchableOpacity onPress={() => authcontext.toggleEducation()}>
-              <Image
-                style={{width: 25, height: 25}}
-                source={require('../assets/images/education.png')}
-              />
-              <Typo weight="bold" size="22">
-                Education
-              </Typo>
-              <Typo weight="normal" size="14">
-                Admissions, SNF & Refferals
-              </Typo>
-            </TouchableOpacity>
-
-            <Icon name="navigate-next" size={40} color="#c9c9d4" />
+      <View style={styles.adminCard}>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}>
+          <View>
+            <Image
+              style={{width: 22, height: 16}}
+              source={require('../assets/images/signals.png')}
+            />
+            <Typo weight="bold" size="22">
+              Symptom Check
+            </Typo>
+            <Typo weight="normal" size="14">
+              Refferals, wait times & NPS
+            </Typo>
           </View>
+          <Icon name="navigate-next" size={40} color="#c9c9d4" />
         </View>
-      </ScrollView>
+      </View>
+
+      <View style={styles.adminCard}>
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+          }}>
+          <TouchableOpacity onPress={() => authcontext.toggleEducation()}>
+            <Image
+              style={{width: 25, height: 25}}
+              source={require('../assets/images/education.png')}
+            />
+            <Typo weight="bold" size="22">
+              Education
+            </Typo>
+            <Typo weight="normal" size="14">
+              Admissions, SNF & Refferals
+            </Typo>
+          </TouchableOpacity>
+          <Icon name="navigate-next" size={40} color="#c9c9d4" />
+        </View>
+      </View>
     </View>
   );
 };

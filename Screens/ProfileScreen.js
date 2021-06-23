@@ -13,12 +13,14 @@ const ProfileScreen = props => {
           uri: 'https://cdn.business2community.com/wp-content/uploads/2017/08/blank-profile-picture-973460_640.png',
         }}
       />
-      <Button
-        style={styles.button}
-        mode="contained"
-        onPress={authcontext.changeStatus}>
-        Logout
-      </Button>
+      <View style={{paddingHorizontal: 20}}>
+        <Button
+          style={styles.button}
+          mode="contained"
+          onPress={authcontext.changeStatus}>
+          Logout
+        </Button>
+      </View>
     </View>
   );
 };

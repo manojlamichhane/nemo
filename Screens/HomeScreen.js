@@ -13,7 +13,7 @@ const HomeScreen = props => {
           alignItems: 'center',
         }}>
         <Image
-          style={{width: 109, height: 20}}
+          style={{width: 140, height: 26}}
           source={require('../assets/images/logo.png')}
         />
         <Separator />
@@ -22,25 +22,39 @@ const HomeScreen = props => {
       <View
         style={{
           marginTop: 30,
-          paddingHorizontal: 30,
+          paddingHorizontal: 20,
           alignItems: 'center',
         }}>
         <Typo size="29">Select your healthcare organization</Typo>
         <TouchableOpacity onPress={() => props.navigation.navigate('Login')}>
           <Image
-            style={{width: 200, height: 200, marginTop: 30}}
+            style={{width: 200, height: 200, marginTop: 35}}
             source={require('../assets/images/image_73.png')}
           />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => props.navigation.navigate('Login')}>
+        <TouchableOpacity
+          style={{width: '100%'}}
+          onPress={() => props.navigation.navigate('Login')}>
           <Image
-            style={{width: 330, height: 86, marginTop: 30}}
+            style={{
+              resizeMode: 'contain',
+              width: 353,
+              height: 89,
+              marginTop: 13,
+            }}
             source={require('../assets/images/image_74.png')}
           />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => props.navigation.navigate('Login')}>
+        <TouchableOpacity
+          style={{width: '100%'}}
+          onPress={() => props.navigation.navigate('Login')}>
           <Image
-            style={{width: 330, height: 86, marginTop: 30}}
+            style={{
+              resizeMode: 'contain',
+              width: 353,
+              height: 89,
+              marginTop: 13,
+            }}
             source={require('../assets/images/image_75.png')}
           />
         </TouchableOpacity>

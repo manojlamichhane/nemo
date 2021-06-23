@@ -38,7 +38,7 @@ const EducationHome = props => {
     }
   }, []);
   return (
-    <View style={{marginTop: 42, paddingHorizontal: 20}}>
+    <View style={{flex: 1, marginTop: 42, paddingHorizontal: 20}}>
       <View style={{flexDirection: 'row', justifyContent: 'center'}}>
         <Icon
           onPress={() => authcontext.toggleEducation()}
@@ -51,31 +51,32 @@ const EducationHome = props => {
           Education
         </Typo>
       </View>
-      <TextInput
-        style={{marginVertical: 20}}
-        label="Search"
-        mode="outlined"
-        value={null}
-        onChangeText={null}
-        right={
-          <TextInput.Icon
-            name={() => <Icon name="search-outline" size={24} />}
-          />
-        }
-      />
-      <FlatList
-        horizontal
-        data={categories}
-        keyExtractor={item => item.id}
-        renderItem={({item}) => {
-          return (
-            <View key={item.id} style={styles.categorybar}>
-              <Typo size="14">{item.name}</Typo>
-            </View>
-          );
-        }}
-      />
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <TextInput
+          style={{marginVertical: 20, fontSize: 16}}
+          label="Search"
+          mode="outlined"
+          value={null}
+          onChangeText={null}
+          right={
+            <TextInput.Icon
+              name={() => <Icon name="search-outline" size={24} />}
+            />
+          }
+        />
+        <FlatList
+          horizontal
+          data={categories}
+          keyExtractor={item => item.id}
+          renderItem={({item}) => {
+            return (
+              <View key={item.id} style={styles.categorybar}>
+                <Typo size="14">{item.name}</Typo>
+              </View>
+            );
+          }}
+        />
+
         <View style={{marginVertical: 25}}>
           <Typo size="12" color="#6294AF">
             KEEP VIEWING

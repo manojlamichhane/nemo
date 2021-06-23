@@ -17,15 +17,8 @@ const PatientLogin = props => {
           justifyContent: 'space-between',
           alignItems: 'center',
         }}>
-        {/* <Icon
-          onPress={() => console.log('pressed')}
-          // style={{position: 'absolute', right: 10}}
-          name="arrow-back"
-          size={40}
-          color="black"
-        /> */}
         <Image
-          style={{width: 109, height: 20}}
+          style={{width: 140, height: 26}}
           source={require('../assets/images/logo.png')}
         />
         <Separator />
@@ -39,10 +32,11 @@ const PatientLogin = props => {
           marginTop: 64,
         }}>
         <Image
-          style={{width: '100%', height: '11%', resizeMode: 'cover'}}
+          style={{width: '100%', height: 83, resizeMode: 'cover'}}
           source={require('../assets/images/Hi.png')}
         />
         <TextInput
+          disabled
           style={{marginTop: 20, height: 50}}
           mode="outlined"
           label="Username"
@@ -50,10 +44,11 @@ const PatientLogin = props => {
           onChangeText={null}
         />
         <TextInput
+          disabled
           style={{marginTop: 15, height: 50}}
           mode="outlined"
           secureTextEntry
-          right={<TextInput.Icon name="eye" />}
+          right={<TextInput.Icon style={{marginTop: 15}} name="eye" />}
           label="Password"
           value={null}
           onChangeText={null}
@@ -63,6 +58,7 @@ const PatientLogin = props => {
             marginVertical: 20,
             flexDirection: 'row',
             justifyContent: 'space-between',
+            alignItems: 'center',
           }}>
           <TouchableOpacity>
             <Typo size="14">Forgot Username?</Typo>
@@ -75,6 +71,7 @@ const PatientLogin = props => {
           <Typo size="16">Don't yet have an account? Sign Up</Typo>
         </TouchableOpacity>
         <Button
+          disabled
           style={styles.button}
           mode="contained"
           onPress={() => console.log('pressed')}>

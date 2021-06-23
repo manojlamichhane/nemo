@@ -86,7 +86,7 @@ const EducationDetail = props => {
 };
 const styles = StyleSheet.create({
   button: {
-    marginTop: 75,
+    marginTop: 20,
     backgroundColor: '#42deb4',
     width: '100%',
     height: 50,
