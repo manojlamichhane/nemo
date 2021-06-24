@@ -12,6 +12,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import {TextInput} from 'react-native-paper';
 import AuthContext from '../store/contexts/AuthContext';
 import axios from 'axios';
+import {windowHeight, windowWidth} from '../constants';
 
 const EducationHome = props => {
   const authcontext = useContext(AuthContext);
@@ -38,7 +39,8 @@ const EducationHome = props => {
     }
   }, []);
   return (
-    <View style={{flex: 1, marginTop: 42, paddingHorizontal: 20}}>
+    <View
+      style={{flex: 1, marginTop: 42, paddingHorizontal: 0.051 * windowWidth}}>
       <View style={{flexDirection: 'row', justifyContent: 'center'}}>
         <Icon
           onPress={() => authcontext.toggleEducation()}
@@ -47,13 +49,13 @@ const EducationHome = props => {
           size={40}
           color="black"
         />
-        <Typo weight="bold" size="30">
+        <Typo weight="normal" size="30">
           Education
         </Typo>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
         <TextInput
-          style={{marginVertical: 20, fontSize: 16}}
+          style={{marginVertical: 0.051 * windowWidth, fontSize: 16}}
           label="Search"
           mode="outlined"
           value={null}
@@ -77,7 +79,7 @@ const EducationHome = props => {
           }}
         />
 
-        <View style={{marginVertical: 25}}>
+        <View style={{marginVertical: 0.051 * windowWidth}}>
           <Typo size="12" color="#6294AF">
             KEEP VIEWING
           </Typo>

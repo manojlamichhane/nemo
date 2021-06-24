@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {TouchableOpacity, Image, View, StyleSheet} from 'react-native';
 import Separator from '../constants/Separator';
 import Typo from '../constants/Typo';
-import {windowWidth} from '../constants';
+import {windowHeight, windowWidth} from '../constants';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import AuthContext from '../store/contexts/AuthContext';
 
@@ -18,7 +18,11 @@ const PatientDashboard = props => {
           />
         </TouchableOpacity>
         <Image
-          style={{width: 140, height: 26, marginLeft: 15}}
+          style={{
+            width: 0.33 * windowWidth,
+            height: 0.0342 * windowHeight,
+            marginLeft: 15,
+          }}
           source={require('../assets/images/logo.png')}
         />
         <Separator />
@@ -28,7 +32,7 @@ const PatientDashboard = props => {
         <View
           style={{
             ...styles.contactDoctor,
-            width: 226,
+            width: 0.575 * windowWidth,
             backgroundColor: '#8a9fc3',
           }}>
           <Typo color="white" size="18">
@@ -38,7 +42,7 @@ const PatientDashboard = props => {
         <View
           style={{
             ...styles.contactDoctor,
-            width: 87,
+            width: 0.22 * windowWidth,
             backgroundColor: 'white',
             flexDirection: 'row',
             justifyContent: 'space-between',
@@ -66,7 +70,7 @@ const PatientDashboard = props => {
               style={{width: 22, height: 16}}
               source={require('../assets/images/signals.png')}
             />
-            <Typo weight="bold" size="22">
+            <Typo weight="normal" size="22">
               Symptom Check
             </Typo>
             <Typo weight="normal" size="14">
@@ -89,7 +93,7 @@ const PatientDashboard = props => {
               style={{width: 25, height: 25}}
               source={require('../assets/images/education.png')}
             />
-            <Typo weight="bold" size="22">
+            <Typo weight="normal" size="22">
               Education
             </Typo>
             <Typo weight="normal" size="14">
@@ -109,7 +113,7 @@ const styles = StyleSheet.create({
     paddingVertical: 21,
     marginTop: 20,
     backgroundColor: 'white',
-    width: windowWidth * 0.91,
+    width: '100%',
     height: 108,
     borderRadius: 20,
     borderColor: 'grey',

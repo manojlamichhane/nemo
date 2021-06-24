@@ -1,11 +1,14 @@
 import React from 'react';
-import {View, Image, TouchableOpacity} from 'react-native';
+import {ScrollView, View, Image, TouchableOpacity} from 'react-native';
 import Typo from '../constants/Typo';
 import Separator from '../constants/Separator';
+import {windowHeight, windowWidth} from '../constants';
 
 const HomeScreen = props => {
+  console.log(windowWidth, windowHeight);
   return (
-    <View style={{alignItems: 'center', marginTop: 42}}>
+    <View
+      style={{flex: 1, alignItems: 'center', marginTop: 0.055 * windowHeight}}>
       <View
         style={{
           flexDirection: 'row',
@@ -13,7 +16,7 @@ const HomeScreen = props => {
           alignItems: 'center',
         }}>
         <Image
-          style={{width: 140, height: 26}}
+          style={{width: 0.33 * windowWidth, height: 0.0342 * windowHeight}}
           source={require('../assets/images/logo.png')}
         />
         <Separator />
@@ -21,43 +24,49 @@ const HomeScreen = props => {
       </View>
       <View
         style={{
-          marginTop: 30,
-          paddingHorizontal: 20,
+          flex: 1,
+          marginTop: 0.039 * windowHeight,
+          paddingHorizontal: 0.05 * windowWidth,
           alignItems: 'center',
         }}>
-        <Typo size="29">Select your healthcare organization</Typo>
-        <TouchableOpacity onPress={() => props.navigation.navigate('Login')}>
-          <Image
-            style={{width: 200, height: 200, marginTop: 35}}
-            source={require('../assets/images/image_73.png')}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{width: '100%'}}
-          onPress={() => props.navigation.navigate('Login')}>
-          <Image
-            style={{
-              resizeMode: 'contain',
-              width: 353,
-              height: 89,
-              marginTop: 13,
-            }}
-            source={require('../assets/images/image_74.png')}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{width: '100%'}}
-          onPress={() => props.navigation.navigate('Login')}>
-          <Image
-            style={{
-              resizeMode: 'contain',
-              width: 353,
-              height: 89,
-              marginTop: 13,
-            }}
-            source={require('../assets/images/image_75.png')}
-          />
-        </TouchableOpacity>
+        <Typo size={0.08 * windowWidth}>
+          Select your healthcare organization
+        </Typo>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <TouchableOpacity
+            style={{alignItems: 'center'}}
+            onPress={() => props.navigation.navigate('Login')}>
+            <Image
+              style={{
+                width: 0.51 * windowWidth,
+                height: 0.26 * windowHeight,
+                marginTop: 35,
+              }}
+              source={require('../assets/images/image_73.png')}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => props.navigation.navigate('Login')}>
+            <Image
+              style={{
+                width: 0.89 * windowWidth,
+                height: 0.12 * windowHeight,
+                marginTop: 0.017 * windowHeight,
+              }}
+              source={require('../assets/images/image_74.png')}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => props.navigation.navigate('Login')}>
+            <Image
+              style={{
+                resizeMode: 'contain',
+                width: 0.92 * windowWidth,
+                height: 0.12 * windowHeight,
+                marginTop: 0.017 * windowHeight,
+              }}
+              source={require('../assets/images/image_75.png')}
+            />
+          </TouchableOpacity>
+        </ScrollView>
       </View>
     </View>
   );
