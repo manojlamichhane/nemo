@@ -13,7 +13,7 @@ const PatientDashboard = props => {
       style={{
         flex: 1,
         marginTop: 42,
-        paddingHorizontal: 20,
+        paddingHorizontal: 0.05 * windowWidth,
       }}>
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
         <TouchableOpacity onPress={() => props.navigation.openDrawer()}>
@@ -39,7 +39,12 @@ const PatientDashboard = props => {
         <Separator />
         <Typo size="20">Patient</Typo>
       </View>
-      <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+      <View
+        style={{
+          marginTop: 20,
+          flexDirection: 'row',
+          justifyContent: 'space-between',
+        }}>
         <View
           style={{
             ...styles.contactDoctor,
@@ -120,8 +125,8 @@ const PatientDashboard = props => {
 
 const styles = StyleSheet.create({
   adminCard: {
-    paddingHorizontal: 26,
-    paddingVertical: 21,
+    paddingHorizontal: 0.05 * windowWidth,
+    paddingVertical: 0.05 * windowWidth,
     marginTop: 20,
     backgroundColor: 'white',
     width: '100%',

@@ -11,6 +11,7 @@ const VideoPlayer = props => {
         uri: props.source,
       }}
       style={styles.mediaPlayer}
+      navigator={props.navigator}
     />
   );
 };

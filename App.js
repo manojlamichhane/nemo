@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, Text} from 'react-native';
+import {View, StyleSheet} from 'react-native';
 import AuthProvider from './store/providers/AuthProvider';
 import AuthContext from './store/contexts/AuthContext';
 import 'react-native-gesture-handler';

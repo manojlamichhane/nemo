@@ -6,14 +6,13 @@ import {
   ScrollView,
   FlatList,
   Image,
-  Text,
 } from 'react-native';
 import Typo from '../constants/Typo';
 import Icon from 'react-native-vector-icons/Ionicons';
 import {TextInput} from 'react-native-paper';
 import AuthContext from '../store/contexts/AuthContext';
 import axios from 'axios';
-import {windowHeight, windowWidth} from '../constants';
+import {windowWidth} from '../constants';
 
 const EducationHome = props => {
   const authcontext = useContext(AuthContext);
@@ -27,19 +26,11 @@ const EducationHome = props => {
   useEffect(async () => {
     try {
       const resp = await axios.get(
-        'https://api.docnemo.com:443/educational/contents/readAll',
+        `https://api.docnemo.com:443/videos${searchResult}`,
       );
-      setCategories(resp.data);
-      const resp2 = await axios.get(
-        `https://api.docnemo.com:443/educational/keepViewing/readAll?qTitle=${searchResult}`,
-      );
-      console.log('searchResult', searchResult);
-      console.log(resp2.data);
-      setKeepViewing(resp2.data);
-      const resp3 = await axios.get(
-        'https://api.docnemo.com:443/educational/reccommended/readAll',
-      );
-      setRecommendation(resp3.data);
+      setCategories(resp.data.meta.categories);
+      setKeepViewing(resp.data.data.popular);
+      setRecommendation(resp.data.data.recommended);
     } catch (e) {
       console.log(e);
     }
@@ -51,7 +42,7 @@ const EducationHome = props => {
   };
   return (
     <View
-      style={{flex: 1, marginTop: 42, paddingHorizontal: 0.051 * windowWidth}}>
+      style={{flex: 1, marginTop: 42, paddingHorizontal: 0.05 * windowWidth}}>
       <View style={{flexDirection: 'row', justifyContent: 'center'}}>
         <Icon
           onPress={() => authcontext.toggleEducation()}
@@ -92,7 +83,10 @@ const EducationHome = props => {
           keyExtractor={item => item.id}
           renderItem={({item}) => {
             return (
-              <TouchableOpacity onPress={() => setSearchResult(item.name)}>
+              <TouchableOpacity
+                onPress={() =>
+                  setSearchResult(`?category=${item.name.replace(/ /g, '%20')}`)
+                }>
                 <View key={item.id} style={styles.categorybar}>
                   <Typo size="14">{item.name}</Typo>
                 </View>
@@ -101,12 +95,11 @@ const EducationHome = props => {
           }}
         />
 
-        <View style={{marginVertical: 20}}>
+        <View style={{marginVertical: 0.05 * windowWidth}}>
           <Typo size="12" color="#6294AF">
             KEEP VIEWING
           </Typo>
         </View>
-
         <FlatList
           ListEmptyComponent={
             <Typo size="12">No items match your search. Try Again</Typo>
@@ -120,14 +113,19 @@ const EducationHome = props => {
                 onPress={() =>
                   props.navigation.navigate('EducationDetail', {
                     id: item.id,
-                    kind: 'keepViewing',
+                    kind: 'popular',
                   })
                 }>
-                <View style={{width: 221, height: 230, marginRight: 20}}>
+                <View
+                  style={{
+                    width: 221,
+                    height: 240,
+                    marginRight: 0.05 * windowWidth,
+                  }}>
                   <Image
                     style={styles.cardImage}
                     source={{
-                      uri: item.thumbnail_link,
+                      uri: item.thumbnailLink,
                     }}
                   />
                   <View style={{marginVertical: 10}}>
@@ -143,14 +141,14 @@ const EducationHome = props => {
                       justifyContent: 'space-between',
                     }}>
                     <Typo size="12">Brittany Deohon</Typo>
-                    <Typo size="12">{item.video_length_second} second</Typo>
+                    <Typo size="12">{item.length} second</Typo>
                   </View>
                 </View>
               </TouchableOpacity>
             );
           }}
         />
-        <View style={{marginVertical: 20}}>
+        <View style={{marginVertical: 0.05 * windowWidth}}>
           <Typo size="12" color="#6294AF">
             RECOMMENDATION
           </Typo>
@@ -181,7 +179,7 @@ const EducationHome = props => {
                   <Image
                     style={styles.cardImage}
                     source={{
-                      uri: item.thumbnail_link,
+                      uri: item.thumbnailLink,
                     }}
                   />
                   <View style={{marginVertical: 10}}>
@@ -197,7 +195,7 @@ const EducationHome = props => {
                       justifyContent: 'space-between',
                     }}>
                     <Typo size="12">Brittany Deohon</Typo>
-                    <Typo size="12">150 second</Typo>
+                    <Typo size="12">{item.length} second</Typo>
                   </View>
                 </View>
               </TouchableOpacity>
@@ -218,7 +216,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderColor: 'grey',
     borderWidth: 1,
-    borderRadius: 30,
+    borderRadius: 20,
   },
   cardImage: {
     resizeMode: 'contain',

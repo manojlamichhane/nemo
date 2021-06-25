@@ -28,7 +28,7 @@ const HomeScreen = props => {
       <View
         style={{
           flex: 1,
-          marginTop: 0.039 * windowHeight,
+          marginTop: 20,
           paddingHorizontal: 0.05 * windowWidth,
           alignItems: 'center',
         }}>

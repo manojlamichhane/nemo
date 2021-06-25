@@ -13,6 +13,7 @@ import {TextInput, Button} from 'react-native-paper';
 import AuthContext from '../store/contexts/AuthContext';
 
 const PatientLogin = props => {
+  console.log(windowWidth, windowHeight);
   const authcontext = useContext(AuthContext);
   return (
     <View style={{flex: 1, marginTop: 42, alignItems: 'center'}}>
@@ -38,8 +39,8 @@ const PatientLogin = props => {
           style={{
             width: windowWidth,
             height: windowHeight,
-            paddingHorizontal: 20,
-            marginTop: 0.084 * windowHeight,
+            paddingHorizontal: 0.05 * windowWidth,
+            marginTop: 20,
           }}>
           <Image
             style={{
@@ -52,7 +53,7 @@ const PatientLogin = props => {
           <TextInput
             disabled
             style={{
-              marginTop: 0.026 * windowHeight,
+              marginTop: 35,
               height: 0.065 * windowHeight,
             }}
             mode="outlined"
@@ -125,7 +126,7 @@ const styles = StyleSheet.create({
     marginTop: 15,
     backgroundColor: '#42deb4',
     width: '100%',
-    height: 50,
+    height: 0.073 * windowHeight,
     borderRadius: 20,
     alignItems: 'center',
     justifyContent: 'center',
