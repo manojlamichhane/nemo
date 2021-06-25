@@ -3,7 +3,6 @@ import {StyleSheet} from 'react-native';
 import Video from 'react-native-video';
 
 const VideoPlayer = props => {
-  console.log('mediasource', props.source);
   return (
     <Video
       resizeMode="contain"
@@ -18,7 +17,7 @@ const VideoPlayer = props => {
 const styles = StyleSheet.create({
   mediaPlayer: {
     width: '100%',
-    height: 200,
+    height: 180,
     borderRadius: 20,
     backgroundColor: 'black',
   },

@@ -7,8 +7,7 @@ import {windowHeight, windowWidth} from '../constants';
 const HomeScreen = props => {
   console.log(windowWidth, windowHeight);
   return (
-    <View
-      style={{flex: 1, alignItems: 'center', marginTop: 0.055 * windowHeight}}>
+    <View style={{flex: 1, alignItems: 'center', marginTop: 42}}>
       <View
         style={{
           flexDirection: 'row',
@@ -16,7 +15,11 @@ const HomeScreen = props => {
           alignItems: 'center',
         }}>
         <Image
-          style={{width: 0.33 * windowWidth, height: 0.0342 * windowHeight}}
+          style={{
+            resizeMode: 'contain',
+            width: 0.333 * windowWidth,
+            height: 0.033 * windowHeight,
+          }}
           source={require('../assets/images/logo.png')}
         />
         <Separator />

@@ -7,17 +7,12 @@ import {NavigationContainer} from '@react-navigation/native';
 import DrawerNavigator from './navigation/DrawerNavigator';
 import LoginSplash from './Screens/LoginSplash';
 import AuthStack from './navigation/AuthStack';
-import PatientDashboard from './Screens/PatientDashboard';
-import HomeScreen from './Screens/HomeScreen';
-import EducationHome from './Screens/EducationHome';
-import EducationDetail from './Screens/EducationDetail';
 import EducationStack from './navigation/EducationStack';
 import {
   configureFonts,
   DefaultTheme,
   Provider as PaperProvider,
 } from 'react-native-paper';
-import VideoPlayer from './constants/VideoPlayer';
 
 const App = () => {
   const fontConfig = {
@@ -30,16 +25,18 @@ const App = () => {
   };
   const theme = {
     ...DefaultTheme,
+    colors: {
+      ...DefaultTheme.colors,
+      primary: '#42deb4',
+    },
     fonts: configureFonts(fontConfig),
   };
   return (
-    // <EducationDetail />
-    // <PaperProvider theme={theme}>
-    <AuthProvider>
-      <View style={styles.container}>
-        <NavigationContainer>
-          <EducationStack />
-          {/* <AuthContext.Consumer>
+    <PaperProvider theme={theme}>
+      <AuthProvider>
+        <View style={styles.container}>
+          <NavigationContainer>
+            <AuthContext.Consumer>
               {context => {
                 if (context.isAuthenticating) {
                   return <LoginSplash />;
@@ -49,11 +46,11 @@ const App = () => {
                 }
                 return context.isSkip ? <DrawerNavigator /> : <AuthStack />;
               }}
-            </AuthContext.Consumer> */}
-        </NavigationContainer>
-      </View>
-    </AuthProvider>
-    // </PaperProvider>
+            </AuthContext.Consumer>
+          </NavigationContainer>
+        </View>
+      </AuthProvider>
+    </PaperProvider>
   );
 };
 

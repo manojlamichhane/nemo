@@ -23,7 +23,11 @@ const PatientLogin = props => {
           alignItems: 'center',
         }}>
         <Image
-          style={{width: 0.33 * windowWidth, height: 0.0342 * windowHeight}}
+          style={{
+            resizeMode: 'contain',
+            width: 0.333 * windowWidth,
+            height: 0.033 * windowHeight,
+          }}
           source={require('../assets/images/logo.png')}
         />
         <Separator />
@@ -38,7 +42,11 @@ const PatientLogin = props => {
             marginTop: 0.084 * windowHeight,
           }}>
           <Image
-            style={{width: '100%', height: '11.3%'}}
+            style={{
+              resizeMode: 'contain',
+              width: '100%',
+              height: '11%',
+            }}
             source={require('../assets/images/Hi.png')}
           />
           <TextInput

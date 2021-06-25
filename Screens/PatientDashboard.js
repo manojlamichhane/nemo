@@ -9,18 +9,29 @@ import AuthContext from '../store/contexts/AuthContext';
 const PatientDashboard = props => {
   const authcontext = useContext(AuthContext);
   return (
-    <View style={{paddingHorizontal: 17, paddingVertical: 24}}>
+    <View
+      style={{
+        flex: 1,
+        marginTop: 42,
+        paddingHorizontal: 20,
+      }}>
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
         <TouchableOpacity onPress={() => props.navigation.openDrawer()}>
           <Image
-            style={{width: 56, height: 56}}
+            style={{
+              resizeMode: 'contain',
+              width: 40,
+              height: 40,
+              resizeMode: 'contain',
+            }}
             source={require('../assets/images/menu_icon.png')}
           />
         </TouchableOpacity>
         <Image
           style={{
-            width: 0.33 * windowWidth,
-            height: 0.0342 * windowHeight,
+            resizeMode: 'contain',
+            width: 0.333 * windowWidth,
+            height: 0.033 * windowHeight,
             marginLeft: 15,
           }}
           source={require('../assets/images/logo.png')}
