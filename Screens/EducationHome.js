@@ -114,6 +114,7 @@ const EducationHome = props => {
                   props.navigation.navigate('EducationDetail', {
                     id: item.id,
                     kind: 'popular',
+                    category: item.category,
                   })
                 }>
                 <View
@@ -166,7 +167,8 @@ const EducationHome = props => {
                 onPress={() =>
                   props.navigation.navigate('EducationDetail', {
                     id: item.id,
-                    kind: 'reccommended',
+                    kind: 'recommended',
+                    category: item.category,
                   })
                 }>
                 <View

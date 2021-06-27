@@ -6,13 +6,20 @@ const AuthProvider = props => {
   const [isSkip, setIsSkip] = useState(false);
   const [education, setEducation] = useState(false);
   const [isAuthenticating, setIsAuthenticating] = useState(false);
-  const [categories, setCategories] = useState({});
+  const [symptom, setSymptom] = useState(false);
 
   const toggleEducation = () => {
     if (education) {
       setEducation(false);
     } else {
       setEducation(true);
+    }
+  };
+  const toggleSymptom = () => {
+    if (symptom) {
+      setSymptom(false);
+    } else {
+      setSymptom(true);
     }
   };
   const changeStatus = () => {
@@ -30,25 +37,15 @@ const AuthProvider = props => {
     }
   };
 
-  const getCategories = async () => {
-    await console.log('hello');
-    // try {
-    //   const resp = await axios.get(
-    //     'https://api.docnemo.com:443/educational/contents/readAll',
-    //   );
-    //   console.log('response', resp);
-    // } catch (e) {
-    //   console.log(e);
-    // }
-  };
-
   return (
     <AuthContext.Provider
       value={{
         education,
+        symptom,
         isSkip,
         isAuthenticating,
-        getCategories,
+
+        toggleSymptom,
         toggleEducation,
         changeStatus,
         changeAuthenticating,

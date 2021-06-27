@@ -75,49 +75,53 @@ const PatientDashboard = props => {
       </View>
 
       <View style={styles.adminCard}>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}>
-          <View>
-            <Image
-              style={{width: 22, height: 16}}
-              source={require('../assets/images/signals.png')}
-            />
-            <Typo weight="normal" size="22">
-              Symptom Check
-            </Typo>
-            <Typo weight="normal" size="14">
-              Refferals, wait times & NPS
-            </Typo>
+        <TouchableOpacity onPress={() => authcontext.toggleSymptom()}>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}>
+            <View>
+              <Image
+                style={{width: 22, height: 16}}
+                source={require('../assets/images/signals.png')}
+              />
+              <Typo weight="normal" size="22">
+                Symptom Check
+              </Typo>
+              <Typo weight="normal" size="14">
+                Refferals, wait times & NPS
+              </Typo>
+            </View>
+            <Icon name="navigate-next" size={40} color="#c9c9d4" />
           </View>
-          <Icon name="navigate-next" size={40} color="#c9c9d4" />
-        </View>
+        </TouchableOpacity>
       </View>
 
       <View style={styles.adminCard}>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}>
-          <TouchableOpacity onPress={() => authcontext.toggleEducation()}>
-            <Image
-              style={{width: 25, height: 25}}
-              source={require('../assets/images/education.png')}
-            />
-            <Typo weight="normal" size="22">
-              Education
-            </Typo>
-            <Typo weight="normal" size="14">
-              Admissions, SNF & Refferals
-            </Typo>
-          </TouchableOpacity>
-          <Icon name="navigate-next" size={40} color="#c9c9d4" />
-        </View>
+        <TouchableOpacity onPress={() => authcontext.toggleEducation()}>
+          <View
+            style={{
+              flexDirection: 'row',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}>
+            <View>
+              <Image
+                style={{width: 25, height: 25}}
+                source={require('../assets/images/education.png')}
+              />
+              <Typo weight="normal" size="22">
+                Education
+              </Typo>
+              <Typo weight="normal" size="14">
+                Admissions, SNF & Refferals
+              </Typo>
+            </View>
+            <Icon name="navigate-next" size={40} color="#c9c9d4" />
+          </View>
+        </TouchableOpacity>
       </View>
     </View>
   );

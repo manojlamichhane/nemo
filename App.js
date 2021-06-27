@@ -13,6 +13,8 @@ import {
   DefaultTheme,
   Provider as PaperProvider,
 } from 'react-native-paper';
+import SymptomHome from './Screens/SymptomHome';
+import SymptomStack from './navigation/SymptomStack';
 
 const App = () => {
   const fontConfig = {
@@ -32,6 +34,7 @@ const App = () => {
     fonts: configureFonts(fontConfig),
   };
   return (
+    // <SymptomHome />
     <PaperProvider theme={theme}>
       <AuthProvider>
         <View style={styles.container}>
@@ -43,6 +46,9 @@ const App = () => {
                 }
                 if (context.education) {
                   return <EducationStack />;
+                }
+                if (context.symptom) {
+                  return <SymptomStack />;
                 }
                 return context.isSkip ? <DrawerNavigator /> : <AuthStack />;
               }}

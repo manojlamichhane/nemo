@@ -9,23 +9,16 @@ import VideoPlayer from '../constants/VideoPlayer';
 
 const EducationDetail = props => {
   const [detail, setDetail] = useState({});
+
   useEffect(async () => {
     try {
-      // const resp = await axios.get(
-      //   `https://api.docnemo.com:443/educational/${props.route.params.kind}/readAll`,
-      // );
-      // console.log(resp.data);
-
       const resp1 = await axios.get(
-        `https://api.docnemo.com:443/videos?type=${props.route.params.kind}`,
+        `https://api.docnemo.com:443/videos?type=${props.route.params.kind}&category=${props.route.params.category}`,
       );
-      // console.log('response', resp1.data.data);
-
       const resp2 = await resp1.data.data.find(
-        item => item.id == props.route.params.id,
+        item => item.id === props.route.params.id,
       );
       setDetail(resp2);
-      console.log(detail);
     } catch (e) {
       console.log(e);
     }
@@ -51,9 +44,11 @@ const EducationDetail = props => {
             {detail && detail.title}
           </Typo>
         </View>
-        <Typo size="12">MARCH 26,2020 | {detail.category}, HEALTH</Typo>
+        <Typo size="12">
+          MARCH 26,2020 | {detail && detail.category}, HEALTH
+        </Typo>
         <View style={{marginVertical: 10}}>
-          <Typo size="14">{detail.description}</Typo>
+          <Typo size="14">{detail && detail.description}</Typo>
         </View>
         <View
           style={{
@@ -76,7 +71,7 @@ const EducationDetail = props => {
           <Typo size="12">{detail && detail.length} second</Typo>
         </View>
         <View style={{marginVertical: 15}}>
-          <VideoPlayer source={detail.mediaFileLink} />
+          <VideoPlayer source={detail && detail.mediaFileLink} />
         </View>
         <Typo size="14">{detail && detail.description}</Typo>
         <Button
