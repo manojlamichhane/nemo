@@ -5,7 +5,6 @@ import {
   View,
   ScrollView,
   FlatList,
-  Image,
 } from 'react-native';
 import Typo from '../constants/Typo';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -13,6 +12,7 @@ import {TextInput} from 'react-native-paper';
 import AuthContext from '../store/contexts/AuthContext';
 import axios from 'axios';
 import {windowWidth} from '../constants';
+import EducationCard from '../constants/EducationCard';
 
 const EducationHome = props => {
   const authcontext = useContext(AuthContext);
@@ -41,9 +41,8 @@ const EducationHome = props => {
     setSearchedCategory(srr);
   };
   return (
-    <View
-      style={{flex: 1, marginTop: 42, paddingHorizontal: 0.05 * windowWidth}}>
-      <View style={{flexDirection: 'row', justifyContent: 'center'}}>
+    <View style={styles.container}>
+      <View style={styles.titleBar}>
         <Icon
           onPress={() => authcontext.toggleEducation()}
           style={{position: 'absolute', left: 0}}
@@ -51,23 +50,24 @@ const EducationHome = props => {
           size={40}
           color="black"
         />
-        <Typo weight="normal" size="30">
-          Education
-        </Typo>
+        <Typo size="30">Education</Typo>
       </View>
+
+      <TextInput
+        style={styles.textField}
+        label="Search by category"
+        mode="outlined"
+        value={search}
+        onChangeText={text => filterSearch(text)}
+        right={
+          <TextInput.Icon
+            name={() => (
+              <Icon name="search-outline" style={{marginTop: 10}} size={24} />
+            )}
+          />
+        }
+      />
       <ScrollView showsVerticalScrollIndicator={false}>
-        <TextInput
-          style={{marginVertical: 20, fontSize: 16}}
-          label="Search by category"
-          mode="outlined"
-          value={search}
-          onChangeText={text => filterSearch(text)}
-          right={
-            <TextInput.Icon
-              name={() => <Icon name="search-outline" size={24} />}
-            />
-          }
-        />
         <View style={{marginBottom: 20}}>
           <Typo size="12" color="#6294AF">
             CATEGORIES
@@ -117,34 +117,10 @@ const EducationHome = props => {
                     category: item.category,
                   })
                 }>
-                <View
-                  style={{
-                    width: 221,
-                    height: 240,
-                    marginRight: 0.05 * windowWidth,
-                  }}>
-                  <Image
-                    style={styles.cardImage}
-                    source={{
-                      uri: item.thumbnailLink,
-                    }}
-                  />
-                  <View style={{marginVertical: 10}}>
-                    <Typo size="18">Gliding on Insulin</Typo>
-                  </View>
-                  <Typo size="14">
-                    Figure skater and type 1 diabetes patient ...
-                  </Typo>
-                  <View
-                    style={{
-                      marginTop: 10,
-                      flexDirection: 'row',
-                      justifyContent: 'space-between',
-                    }}>
-                    <Typo size="12">Brittany Deohon</Typo>
-                    <Typo size="12">{item.length} second</Typo>
-                  </View>
-                </View>
+                <EducationCard
+                  image={item.thumbnailLink}
+                  length={item.length}
+                />
               </TouchableOpacity>
             );
           }}
@@ -171,35 +147,10 @@ const EducationHome = props => {
                     category: item.category,
                   })
                 }>
-                <View
-                  style={{
-                    width: 221,
-                    height: 230,
-                    marginRight: 20,
-                    marginBottom: 20,
-                  }}>
-                  <Image
-                    style={styles.cardImage}
-                    source={{
-                      uri: item.thumbnailLink,
-                    }}
-                  />
-                  <View style={{marginVertical: 10}}>
-                    <Typo size="18">Gliding on Insulin</Typo>
-                  </View>
-                  <Typo size="14">
-                    Figure skater and type 1 diabetes patient ...
-                  </Typo>
-                  <View
-                    style={{
-                      marginTop: 10,
-                      flexDirection: 'row',
-                      justifyContent: 'space-between',
-                    }}>
-                    <Typo size="12">Brittany Deohon</Typo>
-                    <Typo size="12">{item.length} second</Typo>
-                  </View>
-                </View>
+                <EducationCard
+                  image={item.thumbnailLink}
+                  length={item.length}
+                />
               </TouchableOpacity>
             );
           }}
@@ -210,21 +161,27 @@ const EducationHome = props => {
 };
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingHorizontal: 0.055 * windowWidth,
+    paddingTop: 20,
+    backgroundColor: 'white',
+  },
+  titleBar: {flexDirection: 'row', justifyContent: 'center'},
   categorybar: {
     backgroundColor: 'white',
-    width: 140,
-    height: 55,
+    padding: 10,
+    height: 40,
     justifyContent: 'center',
     alignItems: 'center',
     borderColor: 'grey',
     borderWidth: 1,
     borderRadius: 20,
+    marginRight: 10,
   },
-  cardImage: {
-    resizeMode: 'contain',
-    width: 221,
-    height: 125,
-    borderRadius: 20,
+  textField: {
+    marginVertical: 15,
+    height: 50,
   },
 });
 export default EducationHome;

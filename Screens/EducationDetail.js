@@ -25,12 +25,7 @@ const EducationDetail = props => {
   }, []);
 
   return (
-    <View
-      style={{
-        flex: 1,
-        marginTop: 42,
-        paddingHorizontal: 0.05 * windowWidth,
-      }}>
+    <View style={styles.container}>
       <Icon
         onPress={() => props.navigation.navigate('EducationHome')}
         style={{position: 'relative', left: 0}}
@@ -39,38 +34,24 @@ const EducationDetail = props => {
         color="black"
       />
       <ScrollView showsVerticalScrollIndicator={false}>
-        <View style={{marginVertical: 0.051 * windowWidth, marginTop: 20}}>
-          <Typo weight="bold" size="30">
-            {detail && detail.title}
-          </Typo>
-        </View>
+        <Typo size="30">{detail && detail.title}</Typo>
         <Typo size="12">
           MARCH 26,2020 | {detail && detail.category}, HEALTH
         </Typo>
         <View style={{marginVertical: 10}}>
           <Typo size="14">{detail && detail.description}</Typo>
         </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}>
-          <View style={{flexDirection: 'row', alignItems: 'center'}}>
+        <View style={styles.authorBar}>
+          <View style={styles.authorBar}>
             <Image
-              style={{
-                resizeMode: 'contain',
-                width: 47,
-                height: 47,
-                marginRight: 10,
-              }}
+              style={styles.authorImage}
               source={require('../assets/images/image_59.png')}
             />
             <Typo size="12">Brittany Doohan</Typo>
           </View>
           <Typo size="12">{detail && detail.length} second</Typo>
         </View>
-        <View style={{marginVertical: 15}}>
+        <View style={{marginVertical: 10}}>
           <VideoPlayer source={detail && detail.mediaFileLink} />
         </View>
         <Typo size="14">{detail && detail.description}</Typo>
@@ -87,14 +68,31 @@ const EducationDetail = props => {
   );
 };
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    paddingHorizontal: 0.055 * windowWidth,
+    paddingTop: 20,
+    backgroundColor: 'white',
+  },
   button: {
-    marginVertical: 0.05 * windowWidth,
+    marginVertical: 20,
     backgroundColor: '#42deb4',
     width: '100%',
     height: 50,
     borderRadius: 20,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  authorImage: {
+    resizeMode: 'contain',
+    width: 47,
+    height: 47,
+    marginRight: 10,
+  },
+  authorBar: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
 });
 export default EducationDetail;

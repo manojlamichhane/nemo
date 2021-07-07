@@ -1,41 +1,30 @@
 import React, {useContext} from 'react';
-import {TouchableOpacity, Image, View, StyleSheet} from 'react-native';
+import {
+  ScrollView,
+  TouchableOpacity,
+  Image,
+  View,
+  StyleSheet,
+} from 'react-native';
 import Separator from '../constants/Separator';
 import Typo from '../constants/Typo';
-import {windowHeight, windowWidth} from '../constants';
-import Icon from 'react-native-vector-icons/MaterialIcons';
+import {windowWidth} from '../constants';
 import AuthContext from '../store/contexts/AuthContext';
+import Logo from '../constants/Logo';
+import MenuIcon from '../constants/MenuIcon';
+import DashBoardCard from '../constants/DashBoardCard';
 
 const PatientDashboard = props => {
   const authcontext = useContext(AuthContext);
   return (
-    <View
-      style={{
-        flex: 1,
-        marginTop: 42,
-        paddingHorizontal: 0.05 * windowWidth,
-      }}>
-      <View style={{flexDirection: 'row', alignItems: 'center'}}>
-        <TouchableOpacity onPress={() => props.navigation.openDrawer()}>
-          <Image
-            style={{
-              resizeMode: 'contain',
-              width: 40,
-              height: 40,
-              resizeMode: 'contain',
-            }}
-            source={require('../assets/images/menu_icon.png')}
-          />
+    <View style={styles.container}>
+      <View style={styles.titleBar}>
+        <TouchableOpacity
+          style={{position: 'absolute', left: 0}}
+          onPress={() => props.navigation.openDrawer()}>
+          <MenuIcon />
         </TouchableOpacity>
-        <Image
-          style={{
-            resizeMode: 'contain',
-            width: 0.333 * windowWidth,
-            height: 0.033 * windowHeight,
-            marginLeft: 15,
-          }}
-          source={require('../assets/images/logo.png')}
-        />
+        <Logo />
         <Separator />
         <Typo size="20">Patient</Typo>
       </View>
@@ -60,84 +49,50 @@ const PatientDashboard = props => {
             ...styles.contactDoctor,
             width: 0.22 * windowWidth,
             backgroundColor: 'white',
-            flexDirection: 'row',
             justifyContent: 'space-between',
-            paddingHorizontal: 15,
           }}>
           <Image
-            style={{width: 14, height: 20}}
+            style={{width: 18, height: 18, resizeMode: 'contain'}}
             source={require('../assets/images/call.png')}
           />
-          <Typo color="#8a9fc3" size="20">
+          <Typo color="#8a9fc3" size="18">
             911
           </Typo>
         </View>
       </View>
-
-      <View style={styles.adminCard}>
-        <TouchableOpacity onPress={() => authcontext.toggleSymptom()}>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}>
-            <View>
-              <Image
-                style={{width: 22, height: 16}}
-                source={require('../assets/images/signals.png')}
-              />
-              <Typo weight="normal" size="22">
-                Symptom Check
-              </Typo>
-              <Typo weight="normal" size="14">
-                Refferals, wait times & NPS
-              </Typo>
-            </View>
-            <Icon name="navigate-next" size={40} color="#c9c9d4" />
-          </View>
-        </TouchableOpacity>
-      </View>
-
-      <View style={styles.adminCard}>
-        <TouchableOpacity onPress={() => authcontext.toggleEducation()}>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}>
-            <View>
-              <Image
-                style={{width: 25, height: 25}}
-                source={require('../assets/images/education.png')}
-              />
-              <Typo weight="normal" size="22">
-                Education
-              </Typo>
-              <Typo weight="normal" size="14">
-                Admissions, SNF & Refferals
-              </Typo>
-            </View>
-            <Icon name="navigate-next" size={40} color="#c9c9d4" />
-          </View>
-        </TouchableOpacity>
-      </View>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        <View style={{marginVertical: 20}}>
+          <TouchableOpacity onPress={() => authcontext.toggleSymptom()}>
+            <DashBoardCard
+              image={require('../assets/images/signals.png')}
+              title="Symptom Check"
+              subtitle="Referrals, wait times & NPS"
+            />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => authcontext.toggleEducation()}>
+            <DashBoardCard
+              image={require('../assets/images/education.png')}
+              title="Education"
+              subtitle="Admissions, SNF & Refferals"
+            />
+          </TouchableOpacity>
+        </View>
+      </ScrollView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  adminCard: {
-    paddingHorizontal: 0.05 * windowWidth,
-    paddingVertical: 0.05 * windowWidth,
-    marginTop: 20,
+  container: {
+    flex: 1,
+    paddingHorizontal: 0.055 * windowWidth,
+    paddingTop: 20,
     backgroundColor: 'white',
-    width: '100%',
-    height: 108,
-    borderRadius: 20,
-    borderColor: 'grey',
-    borderWidth: 2,
+  },
+  titleBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   contactDoctor: {
     height: 40,
@@ -146,6 +101,8 @@ const styles = StyleSheet.create({
     borderColor: '#8a9fc3',
     alignItems: 'center',
     justifyContent: 'center',
+    flexDirection: 'row',
+    paddingHorizontal: 15,
   },
 });
 export default PatientDashboard;
